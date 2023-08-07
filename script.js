@@ -23,7 +23,8 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
                     {name: 'Something in the way', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
                     {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
                     {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
-                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},]
+                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
+                    {name: "It's Time", cover: "song/It's_Time.jpeg", path: "song/It's_Time.mp3"},]
 
 //shuffle the songsList
 function shuffle(array) {
