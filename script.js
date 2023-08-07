@@ -9,6 +9,9 @@ const volumeDisplay = document.querySelector('#volumeDisplay')
 const volumeBar = document.querySelector('.volumeBar')
 const playlistDisplay = document.querySelector('.playlistDisplay')
 const playlistView = document.querySelector('.playlistView')
+let pause = 0
+let playTime = 0
+let playCount = 0
 
 const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
                     {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
@@ -21,9 +24,29 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
                     {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
                     {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
                     {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},]
-let pause = 0
-let playTime = 0
-let playCount = 0
+
+//shuffle the songsList
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+}
+shuffle(songsList)
+cover.src = songsList[playCount].cover
+
+
 
 let audio = new Audio(songsList[playCount].path)
 
