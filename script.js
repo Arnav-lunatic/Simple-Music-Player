@@ -13,14 +13,14 @@ const playlistView = document.querySelector('.playlistView')
 const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
                     {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
                     {name: "It's You", cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
-                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
                     {name: 'Daylight', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
                     {name: "Busy Earnin'", cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
                     {name: 'New Kings', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
                     {name: 'Happy Man', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
                     {name: 'Something in the way', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
                     {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
-                    {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},]
+                    {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
+                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},]
 let pause = 0
 let playTime = 0
 let playCount = 0
@@ -101,7 +101,7 @@ function PlayPauseSong(){
             playTime = 0
             playCount+=1
             if (playCount >= songsList.length) {
-                playCount= 0
+                playCount= -1
             }
             PlayPauseSong()
         }

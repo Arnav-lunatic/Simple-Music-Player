@@ -56,6 +56,7 @@ body::after {
     left: 20px;
     width: 28px;
     cursor: pointer;
+    z-index: 25;
 }
 
 .playlistDisplay:hover {
@@ -71,7 +72,7 @@ body::after {
     height: 245px;
     background-color: #181818;
     position: absolute;
-    top: 42px;
+    top: 40px;
     overflow-y: auto;
     overscroll-behavior-inline: contain;
     z-index: 20;
@@ -82,7 +83,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px 15px;
+    margin: 9px 15px;
 }
 
 .playlistCover {
@@ -184,7 +185,7 @@ body::after {
 
     .playlistView {
         width: 370px;
-        height: 405px;
+        height: 380px;
     }
 
     .cover {
