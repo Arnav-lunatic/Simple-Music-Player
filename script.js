@@ -46,6 +46,8 @@ function shuffle(array) {
 }
 shuffle(songsList)
 cover.src = songsList[playCount].cover
+title.innerHTML = songsList[playCount].name
+
 
 
 
