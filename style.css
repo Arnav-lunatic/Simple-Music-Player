@@ -99,7 +99,6 @@ body::after {
     border-radius: 100px;
     box-shadow: -2px -2px 30px rgba(0, 0, 0, 0.959);
     transition: 1s;
-    border: 1px solid rgba(255, 255, 255, 0.233);
     animation: 5s linear infinite;
 }
 
@@ -114,7 +113,7 @@ body::after {
     background-image: radial-gradient(#181818, #181818,rgba(0, 0, 0));
     border-radius: 40px;
     border: 10px solid #3a3a3a;
-    transition: 0.5s;
+    transition: 1s;
 }
 
 @keyframes rotateImg{
