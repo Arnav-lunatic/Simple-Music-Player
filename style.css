@@ -99,6 +99,7 @@ body::after {
     border-radius: 100px;
     box-shadow: -2px -2px 30px rgba(0, 0, 0, 0.959);
     transition: 1s;
+    border: 1px solid rgba(255, 255, 255, 0.233);
     animation: 5s linear infinite;
 }
 
