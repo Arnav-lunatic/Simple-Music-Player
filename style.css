@@ -110,7 +110,7 @@ body::after {
     transform: translate(-50%,-50%);
     width: 45px;
     height: 45px;
-    background-image: radial-gradient(#181818,rgba(0, 0, 0));
+    background-image: radial-gradient(#181818, #181818,rgba(0, 0, 0));
     border-radius: 40px;
     border: 10px solid #3a3a3a;
     transition: 0.5s;
