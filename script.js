@@ -126,10 +126,10 @@ function PlayPauseSong(){
         if(playTimeBar===360){
             playTime = 0
             playCount+=1
-            if (playCount >= songsList.length) {
+            PlayPauseSong()
+            if (playCount >= songsList.length-1) {
                 playCount= -1
             }
-            PlayPauseSong()
         }
     })
 }

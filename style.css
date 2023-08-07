@@ -201,7 +201,7 @@ body::after {
     }
 
     .title {
-        font-size: 45px;
+        font-size: 38px;
         text-align: center;
     }
 
@@ -213,5 +213,21 @@ body::after {
     #controlButton:hover {
         background: grey;
         border-radius: 10px;
-    }    
+    }
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 4px;
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
 }
