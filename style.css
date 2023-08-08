@@ -212,11 +212,11 @@ body::after {
     .container{
         flex-direction: row;
         width: 600px;
-        height: 300px;
+        height: 270px;
     }
     body::after {
         width: 665px;
-        height: 365px;
+        height: 335px;
     }
     .playlistView {
         top: 10px;
