@@ -97,7 +97,7 @@ body::after {
 
 .cover {
     width: 200px;
-    border-radius: 100px;
+    border-radius: 50%;
     box-shadow: -2px -2px 30px rgba(0, 0, 0, 0.959);
     transition: 1s;
     animation: 5s linear infinite;
@@ -112,7 +112,7 @@ body::after {
     width: 45px;
     height: 45px;
     background-image: radial-gradient(#181818, #181818,rgba(0, 0, 0));
-    border-radius: 40px;
+    border-radius: 50%;
     border: 10px solid #3a3a3a;
     transition: 1s;
 }
@@ -186,14 +186,12 @@ body::after {
 
     .cover {
         width: 300px;
-        border-radius: 150px;
     }
 
     .cdDesign {
         width: 80px;
         height: 80px;
         border-width: 16px;
-        border-radius: 65px;
     }
 
     .title {
@@ -211,22 +209,39 @@ body::after {
 @media only screen and (max-height: 500px) {
     .container{
         flex-direction: row;
-        width: 600px;
-        height: 270px;
+        width: 500px;
+        height: 230px;
     }
     body::after {
-        width: 665px;
-        height: 335px;
+        width: 565px;
+        height: 295px;
+    }
+    .cover {
+        width: 200px;
+    }
+    .cdDesign {
+        width: 45px;
+        height: 45px;
+        border-width: 10px;
     }
     .playlistView {
         top: 10px;
         left: 10px;
-        width: 340px;
-        height: 330px;
+        width: 260px;
+        height: 250px;
         padding-top: 10px;
     }
     .playlistView > span{
-        margin: 10px 35px;
+        margin: 9px 35px;
+    }
+    .title {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    #controlButton {
+        width: 30px;
+        height: 30px;
     }
 }
 
