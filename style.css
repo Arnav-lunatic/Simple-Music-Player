@@ -210,11 +210,11 @@ body::after {
     .container{
         flex-direction: row;
         width: 500px;
-        height: 220px;
+        height: 200px;
     }
     body::after {
         width: 565px;
-        height: 285px;
+        height: 265px;
     }
     .cover {
         width: 200px;
