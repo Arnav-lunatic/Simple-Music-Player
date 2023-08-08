@@ -83,7 +83,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 9px 15px;
+    margin: 8px 15px;
 }
 
 .playlistCover {
@@ -149,7 +149,6 @@ body::after {
 }
 
 #controlButton {
-    display: flex;
     width: 30px;
     height: 30px;
     margin-top: 20px;
@@ -167,12 +166,9 @@ body::after {
 .play-pause {
     position: absolute;
 }
-.arrow {
-    position: fixed;
-}
 
 
-@media (min-width: 650px) {
+@media only screen and (min-width: 650px) {
     .container {
         width: 375px;
         height: 600px;
@@ -210,9 +206,27 @@ body::after {
         height: 45px;
     }
 
-    #controlButton:hover {
-        background: grey;
-        border-radius: 10px;
+}
+
+@media (max-height: 500px) {
+    .container{
+        flex-direction: row;
+        width: 600px;
+        height: 300px;
+    }
+    body::after {
+        width: 665px;
+        height: 365px;
+    }
+    .playlistView {
+        top: 10px;
+        left: 10px;
+        width: 340px;
+        height: 330px;
+        padding-top: 10px;
+    }
+    .playlistView > span{
+        margin: 10px 35px;
     }
 }
 
