@@ -208,7 +208,7 @@ body::after {
 
 }
 
-@media (max-height: 500px) {
+@media only screen and (max-height: 500px) {
     .container{
         flex-direction: row;
         width: 600px;
