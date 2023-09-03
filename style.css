@@ -24,6 +24,7 @@ body::before {
     right: 0;
     bottom: 0;
     z-index: 100;
+    transition: .5s;
 }
 
 .loader{
@@ -31,9 +32,15 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 60px;
+    font-size: 65px;
+    font-weight: 900;
 }
 
+.loader span {
+    color: #3a3a3a;
+    opacity: .5;
+    margin-left: 5px;
+}
 
 .container {
     display: flex;

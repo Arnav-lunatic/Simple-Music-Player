@@ -9,13 +9,29 @@ const volumeDisplay = document.querySelector('#volumeDisplay')
 const volumeBar = document.querySelector('.volumeBar')
 const playlistDisplay = document.querySelector('.playlistDisplay')
 const playlistView = document.querySelector('.playlistView')
+const loaderText = document.querySelectorAll('.loader span')
 let pause = 0
 let playTime = 0
 let playCount = 0
 
 //Loader
+j = 400
+for (let i = 0; i < 9; i++){
+    setInterval(() => {
+        loaderText[i].style.opacity = '1'
+        loaderText[i].style.color = '#fff'
+        loaderText[i].style.textShadow = '2px 2px 10px #A3A3A3'
+    }, j);
+    j += 400
+}
+
+
+
 window.addEventListener('load', () => {
-    document.querySelector('.loaderPage').style.display = 'none'
+    document.querySelector('.loaderPage').style.opacity = '0'
+    setTimeout(() => {
+        document.querySelector('.loaderPage').style.display = 'none'
+    }, 500);
 })
 
 
