@@ -18,7 +18,7 @@ body::before {
 
 .loaderPage {
     position: absolute;
-    background-color: black;
+    background-color: #282828;
     top: 0;
     left: 0;
     right: 0;

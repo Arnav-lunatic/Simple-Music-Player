@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
     document.querySelector('.loaderPage').style.opacity = '0'
     setTimeout(() => {
         document.querySelector('.loaderPage').style.display = 'none'
-    }, 500);
+    }, 600);
     loading = 0
 })
 
@@ -171,7 +171,7 @@ songsList.forEach(element => {
     playlistView.appendChild(span)
 });
 
-playlistVisible = 0
+let playlistVisible = 0
 
 playlistDisplay.addEventListener('click', () => {
     
