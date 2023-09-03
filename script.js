@@ -13,6 +13,15 @@ let pause = 0
 let playTime = 0
 let playCount = 0
 
+//Loader
+window.addEventListener('load', () => {
+    document.querySelector('.loaderPage').style.display = 'none'
+})
+
+
+//Player
+
+//Song List
 const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
                     {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
                     {name: "It's You", cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
