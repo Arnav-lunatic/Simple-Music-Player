@@ -40,7 +40,7 @@ function updatePlayTime(reverseTimer) {
             document.querySelector('.playTime').innerHTML = `-${Math.floor(audioTimerReverse / 60)}: ${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
         }
             
-        else {
+        else if (!reverseTimer){
             document.querySelector('.playTime').innerHTML = `${Math.floor(audioTimerReverse / 60)}:${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
         }
         
@@ -150,7 +150,11 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
                     {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
                     {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
                     {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
-                    {name: "It's Time", cover: "song/It's_Time.jpeg", path: "song/It's_Time.mp3"},]
+                    {name: 'Can You Hear me', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
+                    {name: "Waving' Flag", cover: "song/Waving'_Flag.jpeg", path: "song/Waving'_Flag.mp3"},
+                    {name: 'Whatever It Takes', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
+                    {name: 'Wrecked', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},                    
+]
 
 
 //shuffle the songsList
