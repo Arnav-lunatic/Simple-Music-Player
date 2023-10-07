@@ -164,6 +164,13 @@ body::after {
     cursor: default;
 }
 
+.displayTimePeriod {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 50px;
+}
+
 .controls {
     display: flex;
     position: relative;
@@ -171,7 +178,6 @@ body::after {
     align-items: center;
     justify-content: space-around;
     width: 300px;
-    margin-top: 20px;
 }
 
 #controlButton {
@@ -223,6 +229,10 @@ body::after {
     .title {
         font-size: 38px;
         text-align: center;
+    }
+
+    .displayTimePeriod {
+        font-size: 20px;
     }
 
     #controlButton {

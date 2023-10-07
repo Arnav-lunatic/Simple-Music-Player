@@ -84,8 +84,11 @@ title.innerHTML = songsList[playCount].name
 let audio = new Audio(songsList[playCount].path)
 
 // play and pause
-playPauseButton.addEventListener('click', () => {
-    PlayPauseSong()
+playPauseButton.addEventListener('click', PlayPauseSong)
+body.addEventListener('keypress', (e) => {
+    if (e.key === ' ') {
+        PlayPauseSong()
+    }
 })
 
 //forward And backward
@@ -148,6 +151,8 @@ function PlayPauseSong(){
     shadowBar is little bit ahead of main bar
     */
     audio.addEventListener('timeupdate', () => {
+        updatePlayTime()
+
         playTime = (audio.currentTime/audio.duration)
         let playTimeBar = 360*(playTime)
         let shadowBar = 360*(playTime/12)
@@ -162,6 +167,22 @@ function PlayPauseSong(){
             }
         }
     })
+}
+
+//Update Playtime
+function updatePlayTime() {
+    const totalTime = Math.floor(audio.duration % 60) //it is converting totalTime into minutes
+    const audioCurrentTime = Math.floor(audio.currentTime % 60)
+
+    if (audioCurrentTime) {
+        document.querySelector('.playTime').innerHTML = `${Math.floor(audio.currentTime / 60)}:${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
+    }
+    
+    if (totalTime) {
+       document.querySelector('.totalTime').innerHTML = `${Math.floor(audio.duration / 60)}:${(totalTime < 10) ? '0' + totalTime : totalTime}` 
+    }
+    
+    
 }
 
 //playlist
