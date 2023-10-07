@@ -15,7 +15,7 @@ let playTime = 0
 let playCount = 0
 
 //Loader
-let loading = 1
+let loading = true
 function startLoad(){
     j = 400
     for (let i = 0; i < 9; i++){
@@ -27,36 +27,30 @@ function startLoad(){
         j += 400
     }    
 }
-if (loading===1) {
-    startLoad()
+
+//Update Playtime
+function updatePlayTime(reverseTimer) {
+    let audioTimerReverse = (reverseTimer) ? audio.duration - audio.currentTime : audio.currentTime
+
+    const totalTime = Math.floor(audio.duration % 60) //it is converting totalTime into minutes
+    const audioCurrentTime = Math.floor(audioTimerReverse % 60)
+
+    if (audioCurrentTime) {
+        if (reverseTimer) {
+            document.querySelector('.playTime').innerHTML = `-${Math.floor(audioTimerReverse / 60)}: ${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
+        }
+            
+        else {
+            document.querySelector('.playTime').innerHTML = `${Math.floor(audioTimerReverse / 60)}:${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
+        }
+        
+    }
+    
+    if (totalTime) {
+       document.querySelector('.totalTime').innerHTML = `${Math.floor(audio.duration / 60)}:${(totalTime < 10) ? '0' + totalTime : totalTime}` 
+    }
 }
 
-window.addEventListener('load', () => {
-    document.querySelector('.loaderPage').style.opacity = '0'
-    setTimeout(() => {
-        document.querySelector('.loaderPage').style.display = 'none'
-    }, 600);
-    loading = 0
-})
-
-
-//Player
-
-//Song List
-const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
-                    {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
-                    {name: "It's You", cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
-                    {name: 'Daylight', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
-                    {name: "Busy Earnin'", cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
-                    {name: 'New Kings', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
-                    {name: 'Happy Man', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
-                    {name: 'Something in the way', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
-                    {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
-                    {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
-                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
-                    {name: "It's Time", cover: "song/It's_Time.jpeg", path: "song/It's_Time.mp3"},]
-
-//shuffle the songsList
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
   
@@ -74,11 +68,95 @@ function shuffle(array) {
   
     return array;
 }
+
+//play/pause Song
+function PlayPauseSong(){
+    if (pause===0) {
+        if (playTime===0) {
+            audio = new Audio(songsList[playCount].path)
+        }
+        audio.play()
+        pause=1
+
+        cover.src = songsList[playCount].cover
+        title.innerHTML = songsList[playCount].name
+
+        playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+        cover.style.animationName = 'rotateImg'
+        cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
+        cdDesign.style.opacity = '1'
+    }
+    else if(pause===1){
+        audio.pause()
+        pause=0
+        playPauseButton.innerHTML = `<svg class="play" id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><style>svg{fill:#ffffff}</style><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>`
+        cover.style.border = ''
+        cover.style.animationName = ''
+        cdDesign.style.opacity = '0'
+    }
+
+
+    // listen time update
+    /*
+    playTime is percentage of music played - (currentTime/duration)*100
+    playTimeBar is music progress bar which total length is 360 degree. 360*(playTime)/100
+    shadowBar is little bit ahead of main bar
+    */
+    audio.addEventListener('timeupdate', () => {
+        updatePlayTime(reverseTimer)
+
+        playTime = (audio.currentTime/audio.duration)
+        let playTimeBar = 360*(playTime)
+        let shadowBar = 360*(playTime/12)
+        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar+shadowBar}deg)`)
+
+        if(playTimeBar===360){
+            playTime = 0
+            playCount+=1
+            PlayPauseSong()
+            if (playCount >= songsList.length-1) {
+                playCount= -1
+            }
+        }
+    })
+}
+
+
+
+// Loading Screen
+if (loading) {
+    startLoad()
+}
+
+window.addEventListener('load', () => {
+    document.querySelector('.loaderPage').style.opacity = '0'
+    setTimeout(() => {
+        document.querySelector('.loaderPage').style.display = 'none'
+    }, 600);
+    loading = false
+})
+
+
+//Player
+//Song List
+const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
+                    {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
+                    {name: "It's You", cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
+                    {name: 'Daylight', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
+                    {name: "Busy Earnin'", cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
+                    {name: 'New Kings', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
+                    {name: 'Happy Man', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
+                    {name: 'Something in the way', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
+                    {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
+                    {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
+                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
+                    {name: "It's Time", cover: "song/It's_Time.jpeg", path: "song/It's_Time.mp3"},]
+
+
+//shuffle the songsList
 shuffle(songsList)
 cover.src = songsList[playCount].cover
 title.innerHTML = songsList[playCount].name
-
-
 
 
 let audio = new Audio(songsList[playCount].path)
@@ -117,73 +195,13 @@ backwardButton.addEventListener('click', () => {
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
 })
 
-//play/pause Song
-function PlayPauseSong(){
-    if (pause===0) {
-        if (playTime===0) {
-            audio = new Audio(songsList[playCount].path)
-        }
-        audio.play()
-        pause=1
 
-        cover.src = songsList[playCount].cover
-        title.innerHTML = songsList[playCount].name
+// Change the Play Time to Time left
+reverseTimer = false
+document.querySelector('.playTime').addEventListener('click', () => {
+    reverseTimer = (reverseTimer) ? false : true
+})
 
-        playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
-        cover.style.animationName = 'rotateImg'
-        cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
-        cdDesign.style.opacity = '1'
-    }
-    else if(pause===1){
-        audio.pause()
-        pause=0
-        playPauseButton.innerHTML = `<svg class="play" id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><style>svg{fill:#ffffff}</style><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>`
-        cover.style.border = ''
-        cover.style.animationName = ''
-        cdDesign.style.opacity = '0'
-    }
-
-
-    // listen time update
-    /*
-    playTime is percentage of music played - (currentTime/duration)*100
-    playTimeBar is music progress bar which total length is 360 degree. 360*(playTime)/100
-    shadowBar is little bit ahead of main bar
-    */
-    audio.addEventListener('timeupdate', () => {
-        updatePlayTime()
-
-        playTime = (audio.currentTime/audio.duration)
-        let playTimeBar = 360*(playTime)
-        let shadowBar = 360*(playTime/12)
-        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar+shadowBar}deg)`)
-
-        if(playTimeBar===360){
-            playTime = 0
-            playCount+=1
-            PlayPauseSong()
-            if (playCount >= songsList.length-1) {
-                playCount= -1
-            }
-        }
-    })
-}
-
-//Update Playtime
-function updatePlayTime() {
-    const totalTime = Math.floor(audio.duration % 60) //it is converting totalTime into minutes
-    const audioCurrentTime = Math.floor(audio.currentTime % 60)
-
-    if (audioCurrentTime) {
-        document.querySelector('.playTime').innerHTML = `${Math.floor(audio.currentTime / 60)}:${(audioCurrentTime < 10) ? '0' + audioCurrentTime : audioCurrentTime}`
-    }
-    
-    if (totalTime) {
-       document.querySelector('.totalTime').innerHTML = `${Math.floor(audio.duration / 60)}:${(totalTime < 10) ? '0' + totalTime : totalTime}` 
-    }
-    
-    
-}
 
 //playlist
 songsList.forEach(element => {

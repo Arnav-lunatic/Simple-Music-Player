@@ -231,6 +231,9 @@ body::after {
         text-align: center;
     }
 
+    .playTime {
+        cursor: pointer;
+    }
     .displayTimePeriod {
         font-size: 20px;
     }
