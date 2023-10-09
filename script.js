@@ -151,7 +151,7 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
                     {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
                     {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
                     {name: 'Can You Hear me', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
-                    {name: "Waving' Flag", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
+                    {name: "Wavin' Flag", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
                     {name: 'Whatever It Takes', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
                     {name: 'Wrecked', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},                    
 ]
