@@ -15,7 +15,6 @@ let playTime = 0
 let playCount = 0
 
 //Loader
-let loading = true
 function startLoad(){
     j = 400
     for (let i = 0; i < 9; i++){
@@ -27,6 +26,15 @@ function startLoad(){
         j += 400
     }    
 }
+startLoad()
+
+window.addEventListener('load', () => {
+    document.querySelector('.loaderPage').style.opacity = '0'
+    setTimeout(() => {
+        document.querySelector('.loaderPage').style.display = 'none'
+    }, 600);
+})
+
 
 //Update Playtime
 function updatePlayTime(reverseTimer) {
@@ -120,21 +128,6 @@ function PlayPauseSong(){
         }
     })
 }
-
-
-
-// Loading Screen
-if (loading) {
-    startLoad()
-}
-
-window.addEventListener('load', () => {
-    document.querySelector('.loaderPage').style.opacity = '0'
-    setTimeout(() => {
-        document.querySelector('.loaderPage').style.display = 'none'
-    }, 600);
-    loading = false
-})
 
 
 //Player
