@@ -146,7 +146,9 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
                     {name: 'Can You Hear me', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
                     {name: "Wavin' Flag", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
                     {name: 'Whatever It Takes', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
-                    {name: 'Wrecked', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},                    
+                    {name: 'Wrecked', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},
+                    {name: 'Cancer', cover: 'song/Cancer.jpeg', path: 'song/Cancer.mp3' },
+                    {name: 'All of the Star', cover: 'song/All_of_the_Stars.jpeg', path: 'song/All_of_the_Stars.mp3'},
 ]
 
 
@@ -192,6 +194,31 @@ backwardButton.addEventListener('click', () => {
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
 })
 
+// 10 seconds forward and backward
+const forward10 = document.querySelector('.forward10sec')
+const backward10 = document.querySelector('.backward10sec')
+
+forward10.addEventListener('click', () => {
+    if (pause === 0) {
+        PlayPauseSong()
+    }
+    audio.currentTime += 10
+    forward10.style.rotate = '100deg'
+    setTimeout(() => {
+        forward10.style.rotate = '0deg'
+    }, 500);
+})
+backward10.addEventListener('click', () => {
+    if (pause === 0) {
+        PlayPauseSong()
+    }
+    audio.currentTime -= 10
+    backward10.style.rotate = '-100deg'
+    setTimeout(() => {
+        backward10.style.rotate = '0deg'
+    }, 500);
+})
+
 
 // Change the Play Time to Time left
 reverseTimer = false
@@ -201,6 +228,11 @@ document.querySelector('.playTime').addEventListener('click', () => {
 
 
 //playlist
+const line1 = document.querySelector('.line1')
+const line2 = document.querySelector('.line2')
+const line3 = document.querySelector('.line3')
+
+
 songsList.forEach(element => {
     const span = document.createElement("span");
     span.innerHTML = `<img src="${element.cover}" alt="M" class="playlistCover"><div class="playlistTitle">${element.name}</div>`
@@ -214,12 +246,16 @@ playlistDisplay.addEventListener('click', () => {
 
     if (playlistVisible===0) {
         playlistView.style.opacity = '1'
-        playlistDisplay.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><style>svg{fill:#ffffff}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>'
+        line1.style.transform = 'rotate(45deg)'
+        line2.style.opacity = '0'
+        line3.style.transform = 'rotate(-45deg)'
         playlistVisible = 1
     }
     else {
         playlistView.style.opacity = '0'
-            playlistDisplay.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>'
+        line1.style.transform = ''
+        line2.style.opacity = '1'
+        line3.style.transform = ''
         playlistVisible = 0
     }
 })
