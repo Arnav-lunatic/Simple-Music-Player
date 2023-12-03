@@ -35,7 +35,37 @@ window.addEventListener('load', () => {
 
 
 //Update Playtime
-function updatePlayTime(reverseTimer) {
+function updatePlaytime() {
+    // listen time update
+    /*
+    playTime is percentage of music played - (currentTime/duration)*100
+    playTimeBar is music progress bar which total length is 360 degree. 360*(playTime)/100
+    shadowBar is little bit ahead of main bar
+    */
+    audio.addEventListener('timeupdate', () => {
+        reverseTime(reverseTimer)
+
+        playTime = (audio.currentTime/audio.duration)
+        let playTimeBar = 360*(playTime)
+        let shadowBar = 360*(playTime/12)
+        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar+shadowBar}deg)`)
+
+        if(playTimeBar===360){
+            playTime = 0
+            playCount+=1
+            PlayPauseSong()
+            if (playCount >= songsList.length-1) {
+                playCount= -1
+            }
+            // update the playing song in playlist view
+            whichSongPlaying()
+        }
+    })
+    
+}
+
+// show the left time 
+function reverseTime(reverseTimer) {
     let audioTimerReverse = (reverseTimer) ? audio.duration - audio.currentTime : audio.currentTime
 
     const totalTime = Math.floor(audio.duration % 60) //it is converting totalTime into minutes
@@ -75,6 +105,8 @@ function shuffle(array) {
     return array;
 }
 
+
+
 //play/pause Song
 function PlayPauseSong(){
     if (pause===0) {
@@ -102,29 +134,9 @@ function PlayPauseSong(){
     }
 
 
-    // listen time update
-    /*
-    playTime is percentage of music played - (currentTime/duration)*100
-    playTimeBar is music progress bar which total length is 360 degree. 360*(playTime)/100
-    shadowBar is little bit ahead of main bar
-    */
-    audio.addEventListener('timeupdate', () => {
-        updatePlayTime(reverseTimer)
-
-        playTime = (audio.currentTime/audio.duration)
-        let playTimeBar = 360*(playTime)
-        let shadowBar = 360*(playTime/12)
-        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar+shadowBar}deg)`)
-
-        if(playTimeBar===360){
-            playTime = 0
-            playCount+=1
-            PlayPauseSong()
-            if (playCount >= songsList.length-1) {
-                playCount= -1
-            }
-        }
-    })
+    
+    
+    updatePlaytime()
 }
 
 
@@ -177,6 +189,9 @@ forwardButton.addEventListener('click', () => {
     }
     PlayPauseSong()
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+
+    // update the playing song in playlist view
+    whichSongPlaying()
 })
 
 backwardButton.addEventListener('click', () => {
@@ -190,6 +205,9 @@ backwardButton.addEventListener('click', () => {
     pause = 0
     PlayPauseSong()
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+
+    // update the playing song in playlist view
+    whichSongPlaying()
 })
 
 // 10 seconds forward and backward
@@ -219,7 +237,7 @@ backward10.addEventListener('mousedown', () => {
 
 
 // Change the Play Time to Time left
-reverseTimer = false
+let reverseTimer = false
 document.querySelector('.playTime').addEventListener('click', () => {
     reverseTimer = (reverseTimer) ? false : true
 })
@@ -230,20 +248,22 @@ const line1 = document.querySelector('.line1')
 const line2 = document.querySelector('.line2')
 const line3 = document.querySelector('.line3')
 
-
 songsList.forEach(element => {
     const span = document.createElement("span");
-    span.innerHTML = `<img src="${element.cover}" alt="M" class="playlistCover"><div class="playlistTitle">${element.name}</div>`
+    span.id = element.name
+    span.innerHTML = `<img src="${element.cover}" alt="M" class="playlistCover">
+                      <div class="playlistTitle">${element.name}</div>`
+    
     playlistView.appendChild(span)
 });
 
 let playlistVisible = 0
-
 playlistDisplay.addEventListener('click', () => {
     
 
     if (playlistVisible===0) {
         playlistView.style.opacity = '1'
+        playlistView.style.zIndex = '20'
         line1.style.transform = 'rotate(45deg)'
         line2.style.opacity = '0'
         line3.style.transform = 'rotate(-45deg)'
@@ -251,6 +271,7 @@ playlistDisplay.addEventListener('click', () => {
     }
     else {
         playlistView.style.opacity = '0'
+        playlistView.style.zIndex = '-1'
         line1.style.transform = ''
         line2.style.opacity = '1'
         line3.style.transform = ''
@@ -258,13 +279,50 @@ playlistDisplay.addEventListener('click', () => {
     }
 })
 
+// It will indicate the playing song in playlist
+function whichSongPlaying() {
+    for (let index = 1; index < playlistView.childElementCount+1 ; index++) {
+        playlistView.childNodes[index].style.color = '#fff'
+    }
+
+    playlistView.childNodes[playCount + 1].style.color = '#FF0059'
+}
+whichSongPlaying()
+
+// play song from playlist
+
+playlistView.childNodes.forEach(element => {
+    element.addEventListener('click', () => {
+        for (let index = 0; index < songsList.length; index++) {
+            if (songsList[index].name === element.id) {
+                audio.pause();
+                audio = new Audio(songsList[index].path);
+                audio.play()
+                playCount = index
+                whichSongPlaying()
+                updatePlaytime()
+
+                playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+                break;
+            }            
+        }
+        
+    })
+});
+
 // Volume
 const volumeBar = document.querySelector('.volume')
 
-volumeBar.addEventListener('input', () => {
+function setVolume() {
     audio.volume = volumeBar.value / 100
     document.querySelector('.volumePercent').innerHTML = volumeBar.value
+}
+
+volumeBar.addEventListener('input', () => {
+    setVolume()
 })
+
+setVolume() // it update the volume Percentage
 
 //mute button
 let mute = false

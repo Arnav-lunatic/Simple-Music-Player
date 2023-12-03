@@ -112,7 +112,7 @@ body::after {
     padding-top: 25px;
     overflow-y: auto;
     overscroll-behavior-inline: contain;
-    z-index: 20;
+    z-index: -1;
     transition: 0.3s;
 }
 
@@ -121,6 +121,7 @@ body::after {
     align-items: center;
     justify-content: space-between;
     margin: 8px 15px;
+    cursor: pointer;
 }
 
 .playlistCover {
@@ -185,9 +186,13 @@ body::after {
 .displayTimePeriodWraper {
     display: flex;
     align-items: center;
+
 }
 .timePeriod {
     margin: 0 10px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .ten {
@@ -354,24 +359,24 @@ body::after {
     background-color: #272727;
     border-radius: 10px;
     overflow: hidden;
-
-
 }
 
 .volume::-webkit-slider-thumb {
     appearance: none;
-    width: 2px;
+    width: 15px;
     height: 32px;
-    background: #181818;
+    background-color: #ffffffcc;
     box-shadow: -407px 0 0 400px #ffffffcc;
+    border: none;
 }
 
 .volume::-moz-range-thumb {
     appearance: none;
-    width: 0px;
+    width: 15px;
     height: 32px;
-    background: #181818;
+    background-color: #ffffffcc;
     box-shadow: -407px 0 0 400px #ffffffcc;
+    border: none;
 }
 
 .volumePercent {
@@ -381,4 +386,5 @@ body::after {
     font-size: 25px;
     font-weight: 800;
     text-shadow: 0 0 2px #333333;
+    pointer-events: none;
 }
