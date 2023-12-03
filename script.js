@@ -107,6 +107,18 @@ function shuffle(array) {
 
 
 
+// this function will run all the other thing which should start with a song
+function songPlaying() {
+    cover.src = songsList[playCount].cover
+    title.innerHTML = songsList[playCount].name
+
+    playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+    cover.style.animationName = 'rotateImg'
+    cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
+    cdDesign.style.opacity = '1'
+    pause=1
+}
+
 //play/pause Song
 function PlayPauseSong(){
     if (pause===0) {
@@ -114,15 +126,8 @@ function PlayPauseSong(){
             audio = new Audio(songsList[playCount].path)
         }
         audio.play()
-        pause=1
 
-        cover.src = songsList[playCount].cover
-        title.innerHTML = songsList[playCount].name
-
-        playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
-        cover.style.animationName = 'rotateImg'
-        cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
-        cdDesign.style.opacity = '1'
+        songPlaying()
     }
     else if(pause===1){
         audio.pause()
@@ -302,7 +307,8 @@ playlistView.childNodes.forEach(element => {
                 whichSongPlaying()
                 updatePlaytime()
 
-                playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+                songPlaying()
+
                 break;
             }            
         }
