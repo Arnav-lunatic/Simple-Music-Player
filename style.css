@@ -14,6 +14,7 @@ body::before {
     right: 0;
     bottom: 0;
     opacity: 0.7;
+    overflow: hidden;
 }
 
 .loaderPage {
@@ -46,11 +47,13 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     background-color: #181818;
     position: absolute;
-    width: 250px;
-    height: 400px;
+    width: 70vw;
+    max-width: 450px;
+    height: 70vh;
+    
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -65,8 +68,10 @@ body::after {
     content:'';
     background-image: var(--changePlayTime);
     position: absolute;
-    width: 315px;
-    height: 465px;
+    width: 70vw;
+    max-width: 450px;
+    height: 70vh;
+    padding: 32px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -99,8 +104,9 @@ body::after {
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 195px;
-    background-color: #181818;
+    height: 280px;
+    background-color: #1f1f1f;
+    border-radius: 20px;
     position: absolute;
     top: 15px;
     padding-top: 25px;
@@ -127,7 +133,7 @@ body::after {
 }
 
 .cover {
-    width: 200px;
+    width: 250px;
     border-radius: 50%;
     box-shadow: -2px -2px 30px rgba(0, 0, 0, 0.959);
     transition: 1s;
@@ -224,15 +230,6 @@ body::after {
 
 
 @media only screen and (min-width: 650px) {
-    .container {
-        width: 375px;
-        height: 600px;
-    }
-
-    body::after {
-        width: 440px;
-        height: 665px;
-    }
 
     .playlistView {
         width: 370px;
@@ -347,7 +344,7 @@ body::after {
 .muteButton {
     position: absolute;
     left: 5px;
-    filter: drop-shadow(0 0 5px #000);
+    filter: drop-shadow(0 0 2px #333333);
 }
 
 .volume {
@@ -363,24 +360,25 @@ body::after {
 
 .volume::-webkit-slider-thumb {
     appearance: none;
-    width: 5px;
+    width: 2px;
     height: 32px;
-    background: #fff;
-    box-shadow: -407px 0 0 400px #FF0059;
+    background: #181818;
+    box-shadow: -407px 0 0 400px #ffffffcc;
 }
 
 .volume::-moz-range-thumb {
     appearance: none;
-    width: 5px;
+    width: 0px;
     height: 32px;
-    background: #fff;
-    box-shadow: -407px 0 0 400px #FF0059;
+    background: #181818;
+    box-shadow: -407px 0 0 400px #ffffffcc;
 }
 
 .volumePercent {
     position: absolute;
     right: 5px;
+    color: #FF0059;
     font-size: 25px;
     font-weight: 800;
-    text-shadow: 0 0 5px #000;
+    text-shadow: 0 0 2px #333333;
 }
