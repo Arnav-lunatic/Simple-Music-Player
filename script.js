@@ -5,8 +5,6 @@ const body = document.querySelector('body')
 const cover = document.querySelector('.cover')
 const title = document.querySelector('.title')
 const cdDesign = document.querySelector('.cdDesign')
-const volumeDisplay = document.querySelector('#volumeDisplay')
-const volumeBar = document.querySelector('.volumeBar')
 const playlistDisplay = document.querySelector('.playlistDisplay')
 const playlistView = document.querySelector('.playlistView')
 const loaderText = document.querySelectorAll('.loader span')
@@ -198,7 +196,7 @@ backwardButton.addEventListener('click', () => {
 const forward10 = document.querySelector('.forward10sec')
 const backward10 = document.querySelector('.backward10sec')
 
-forward10.addEventListener('click', () => {
+forward10.addEventListener('mousedown', () => {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -208,7 +206,7 @@ forward10.addEventListener('click', () => {
         forward10.style.rotate = '0deg'
     }, 500);
 })
-backward10.addEventListener('click', () => {
+backward10.addEventListener('mousedown', () => {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -257,5 +255,28 @@ playlistDisplay.addEventListener('click', () => {
         line2.style.opacity = '1'
         line3.style.transform = ''
         playlistVisible = 0
+    }
+})
+
+// Volume
+const volumeBar = document.querySelector('.volume')
+
+volumeBar.addEventListener('input', () => {
+    audio.volume = volumeBar.value / 100
+    document.querySelector('.volumePercent').innerHTML = volumeBar.value
+})
+
+//mute button
+let mute = false
+const muteButton = document.querySelector('.muteButton')
+muteButton.addEventListener('click', () => {
+    if (!mute) {
+        audio.muted = true
+        mute = true
+        muteButton.src = 'volume-mute.png'
+    } else {
+        audio.muted = false
+        mute = false
+        muteButton.src = 'volume.png'
     }
 })
