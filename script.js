@@ -56,21 +56,6 @@ const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', 
 //shuffle the songsList
 shuffle(songsList)
 
-// Preload Image
-function preloadImage(imgUrl) {
-    const img = new Image();
-    img.src = imgUrl;
-}
-
-function preloadSong(songPath) {
-    const song = new Audio(songPath);
-}
-
-for (let index = 0; index < songsList.length; index++) {
-    preloadImage(songsList[index].cover)
-    preloadSong(songsList[index].path)
-}
-
 
 //Update Playtime
 function updatePlaytime() {
@@ -360,3 +345,15 @@ muteButton.addEventListener('click', () => {
         muteButton.src = 'volume.png'
     }
 })
+
+// Preload Image and song
+function preloadImage(imgUrl) {
+    const img = new Image();
+    img.src = imgUrl;
+}
+
+for (let index = 0; index < songsList.length-1; index++) {
+    preloadImage(songsList[index].cover)
+    preloadSong(songsList[index].path)
+    console.log(songsList[index].path);
+}
