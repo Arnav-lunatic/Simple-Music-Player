@@ -112,7 +112,8 @@ body::after {
     padding-top: 25px;
     overflow-y: auto;
     overscroll-behavior-inline: contain;
-    z-index: -1;
+    z-index: 20;
+    pointer-events: none;
     transition: 0.3s;
 }
 
@@ -387,4 +388,8 @@ body::after {
     font-weight: 800;
     text-shadow: 0 0 2px #333333;
     pointer-events: none;
+    
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }

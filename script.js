@@ -196,6 +196,9 @@ forwardButton.addEventListener('click', () => {
     PlayPauseSong()
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
 
+    //change unmute icon
+    muteButton.src = 'volume.png'
+
     // update the playing song in playlist view
     whichSongPlaying()
 })
@@ -212,6 +215,9 @@ backwardButton.addEventListener('click', () => {
     PlayPauseSong()
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
 
+    //change unmute icon
+    muteButton.src = 'volume.png'
+    
     // update the playing song in playlist view
     whichSongPlaying()
 })
@@ -269,7 +275,7 @@ playlistDisplay.addEventListener('click', () => {
 
     if (playlistVisible===0) {
         playlistView.style.opacity = '1'
-        playlistView.style.zIndex = '20'
+        playlistView.style.pointerEvents= 'auto';
         line1.style.transform = 'rotate(45deg)'
         line2.style.opacity = '0'
         line3.style.transform = 'rotate(-45deg)'
@@ -277,7 +283,7 @@ playlistDisplay.addEventListener('click', () => {
     }
     else {
         playlistView.style.opacity = '0'
-        playlistView.style.zIndex = '-1'
+        playlistView.style.pointerEvents= 'none';
         line1.style.transform = ''
         line2.style.opacity = '1'
         line3.style.transform = ''
@@ -355,5 +361,4 @@ function preloadImage(imgUrl) {
 for (let index = 0; index < songsList.length-1; index++) {
     preloadImage(songsList[index].cover)
     preloadSong(songsList[index].path)
-    console.log(songsList[index].path);
 }
