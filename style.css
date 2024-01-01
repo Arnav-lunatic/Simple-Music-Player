@@ -176,6 +176,7 @@ body::after {
     transition: 1s;
     cursor: default;
     margin: 10px;
+    text-align: center;
 }
 
 .displayTimePeriod {
