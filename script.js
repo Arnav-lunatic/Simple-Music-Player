@@ -4,6 +4,7 @@ const backwardButton = document.querySelector('.backward')
 const body = document.querySelector('body')
 const cover = document.querySelector('.cover')
 const title = document.querySelector('.title')
+const artist = document.querySelector('.artist')
 const cdDesign = document.querySelector('.cdDesign')
 const playlistDisplay = document.querySelector('.playlistDisplay')
 const playlistView = document.querySelector('.playlistView')
@@ -34,23 +35,28 @@ window.addEventListener('load', () => {
 })
 
 //Song List
-const songsList = [ {name: 'If You Believe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3'},
-                    {name: 'Mera Safar', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
-                    {name: "It's You", cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
-                    {name: 'Daylight', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
-                    {name: "Busy Earnin'", cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
-                    {name: 'New Kings', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
-                    {name: 'Happy Man', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
-                    {name: 'Something in the way', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
-                    {name: 'Blinding Lights', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
-                    {name: 'Hustler', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
-                    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
-                    {name: 'Can You Hear me', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
-                    {name: "Wavin' Flag", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
-                    {name: 'Whatever It Takes', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
-                    {name: 'Wrecked', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},
-                    {name: 'Cancer', cover: 'song/Cancer.jpeg', path: 'song/Cancer.mp3' },
-                    {name: 'All of the Star', cover: 'song/All_of_the_Stars.jpeg', path: 'song/All_of_the_Stars.mp3'},
+const songsList = [
+    { name: 'If You Believe', artist: 'Strive to Be, Patch Crowe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3' },
+    { name: 'Mera Safar', artist:'Iqlipse Nova', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
+    {name: "It's You", artist:'Ali Gatie', cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
+    {name: 'Daylight', artist:'David Kushner', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
+    {name: "Busy Earnin'", artist:'Jungle', cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
+    {name: 'New Kings', artist:'Sleeping Wolf', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
+    {name: 'Happy Man', artist:'Jungle', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
+    {name: 'Something in the way', artist:'Nirvana', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
+    {name: 'Blinding Lights', artist:'The weeknd', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
+    {name: 'Hustler', artist:'Zayde Wolf', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
+    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
+    {name: 'Can You Hear me', artist:'Munn', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
+    {name: "Wavin' Flag", artist:"K'NAAN", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
+    {name: 'Whatever It Takes', artist:'Imagine Dragons', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
+    {name: 'Wrecked', artist:'Imagine Dragons',  cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},
+    {name: 'Cancer', artist:'Twenty One Pilots', cover: 'song/Cancer.jpeg', path: 'song/Cancer.mp3' },
+    {name: 'All of the Star', artist:'Ed Sheeran', cover: 'song/All_of_the_Stars.jpeg', path: 'song/All_of_the_Stars.mp3'},
+    { name: "Mirage-Assassin's Creed", artist: 'One Republic', cover: 'song/Mirage.jpeg', path: 'song/Mirage.mp3' },
+    { name: "Supermarket Flowers", artist: 'Ed Sheeran', cover: 'song/Supermarket Flowers.jpeg', path: 'song/Supermarket Flowers.mp3' },
+    { name: "White Flag", artist: 'Dido', cover: 'song/White Flag.jpeg', path: 'song/White Flag.mp3' },
+    {name: "Thank You", artist:'Dido', cover: 'song/Thank you.jpeg', path: 'song/Thank You.mp3'},
 ]
 
 //shuffle the songsList
@@ -134,6 +140,8 @@ function shuffle(array) {
 function songPlaying() {
     cover.src = songsList[playCount].cover
     title.innerHTML = songsList[playCount].name
+    artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Unknown Artist'
+    setVolume()
 
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
     cover.style.animationName = 'rotateImg'
@@ -172,6 +180,7 @@ function PlayPauseSong(){
 
 cover.src = songsList[playCount].cover
 title.innerHTML = songsList[playCount].name
+artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Unknown Artist'
 
 
 let audio = new Audio(songsList[playCount].path)
@@ -342,13 +351,13 @@ let mute = false
 const muteButton = document.querySelector('.muteButton')
 muteButton.addEventListener('click', () => {
     if (!mute) {
-        audio.muted = true
-        mute = true
-        muteButton.src = 'volume-mute.png'
+        audio.muted = true;
+        mute = true;
+        muteButton.src = 'volume-mute.png';
     } else {
-        audio.muted = false
-        mute = false
-        muteButton.src = 'volume.png'
+        audio.muted = false;
+        mute = false;
+        muteButton.src = 'volume.png';
     }
 })
 
@@ -359,6 +368,6 @@ function preloadImage(imgUrl) {
 }
 
 for (let index = 0; index < songsList.length-1; index++) {
-    preloadImage(songsList[index].cover)
-    preloadSong(songsList[index].path)
+    preloadImage(songsList[index].cover);
+    preloadSong(songsList[index].path);
 }
