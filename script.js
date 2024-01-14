@@ -77,12 +77,13 @@ function updatePlaytime() {
         playTime = (audio.currentTime/audio.duration)
         let playTimeBar = 360*(playTime)
         let shadowBar = 360*(playTime/12)
-        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar+shadowBar}deg)`)
+        body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar + shadowBar}deg)`)
 
-        if(playTimeBar===360){
+        if(playTimeBar>=360){
             playTime = 0
-            playCount+=1
+            playCount += 1
             PlayPauseSong()
+        
             if (playCount >= songsList.length-1) {
                 playCount= -1
             }
@@ -142,6 +143,9 @@ function songPlaying() {
     title.innerHTML = songsList[playCount].name
     artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Unknown Artist'
     setVolume()
+    if (mute) {
+        muted()
+    }
 
     playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
     cover.style.animationName = 'rotateImg'
@@ -157,6 +161,7 @@ function PlayPauseSong(){
             audio = new Audio(songsList[playCount].path)
         }
         audio.play()
+        audio.controls = true
 
         songPlaying()
     }
@@ -184,6 +189,7 @@ artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Un
 
 
 let audio = new Audio(songsList[playCount].path)
+audio.controls = true
 
 // play and pause
 playPauseButton.addEventListener('click', PlayPauseSong)
@@ -349,15 +355,18 @@ setVolume() // it update the volume Percentage
 //mute button
 let mute = false
 const muteButton = document.querySelector('.muteButton')
+function muted() {
+    audio.muted = false;
+    mute = false;
+    muteButton.src = 'volume.png';
+}
 muteButton.addEventListener('click', () => {
     if (!mute) {
         audio.muted = true;
         mute = true;
         muteButton.src = 'volume-mute.png';
     } else {
-        audio.muted = false;
-        mute = false;
-        muteButton.src = 'volume.png';
+        muted()
     }
 })
 
@@ -369,5 +378,4 @@ function preloadImage(imgUrl) {
 
 for (let index = 0; index < songsList.length-1; index++) {
     preloadImage(songsList[index].cover);
-    preloadSong(songsList[index].path);
 }
