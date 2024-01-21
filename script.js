@@ -143,6 +143,7 @@ function songPlaying() {
     title.innerHTML = songsList[playCount].name
     artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Unknown Artist'
     setVolume()
+    runLoop()
     if (mute) {
         muted()
     }
@@ -368,6 +369,24 @@ muteButton.addEventListener('click', () => {
     } else {
         muted()
     }
+})
+
+// loop button
+const loop = document.querySelector('.loop')
+let looped = false
+function runLoop() {
+    if (!looped) {
+        loop.classList.add('looped')
+        audio.loop = true;
+        looped = true
+    } else {
+        loop.classList.remove('looped')
+        audio.loop = false;
+        looped = false
+    }
+}
+loop.addEventListener('click', () => {
+    runLoop()
 })
 
 // Preload Image and song

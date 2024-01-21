@@ -336,6 +336,14 @@ body::after {
     background: #000;
 }
 
+.secondContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+}
+
 .volumeContainer{
     display: flex;
     align-items: center;
@@ -393,4 +401,18 @@ body::after {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+}
+
+.loop {
+    padding: 1px;
+    border: transparent 2px solid;
+    margin-left: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.looped {
+    background-color: #444444;
+    border: #131313 2px solid;
+    border-radius: 10px;
 }
