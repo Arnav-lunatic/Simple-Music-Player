@@ -167,7 +167,6 @@ function PlayPauseSong(){
         if (playTime === 0) {
             audio = new Audio(songsList[playCount].path)
         }
-        audio.load()
         audio.play()
         audio.controls = true
 
