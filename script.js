@@ -78,18 +78,22 @@ function updatePlaytime() {
         let playTimeBar = 360*(playTime)
         let shadowBar = 360*(playTime/12)
         body.style.setProperty('--changePlayTime', `conic-gradient(#FF0059 ${playTimeBar}deg, transparent ${playTimeBar + shadowBar}deg)`)
+    })
 
-        if(playTimeBar>=360){
-            playTime = 0
-            playCount += 1
-            PlayPauseSong()
-        
-            if (playCount >= songsList.length-1) {
-                playCount= -1
-            }
-            // update the playing song in playlist view
-            whichSongPlaying()
+    // end audio
+    audio.addEventListener('ended', () => {
+        playTime = 0
+        playCount += 1
+        audio = new Audio(songsList[playCount].path)
+        audio.play()
+        songPlaying()
+        updatePlaytime()
+
+        if (playCount >= songsList.length-1) {
+            playCount= -1
         }
+        // update the playing song in playlist view
+        whichSongPlaying()
     })
 }
 
@@ -160,9 +164,10 @@ function songPlaying() {
 //play/pause Song
 function PlayPauseSong(){
     if (pause===0) {
-        if (playTime===0) {
+        if (playTime === 0) {
             audio = new Audio(songsList[playCount].path)
         }
+        audio.load()
         audio.play()
         audio.controls = true
 
@@ -385,6 +390,7 @@ loop.addEventListener('click', () => {
         looped = false
     }
 })
+
 
 // Preload Image and song
 function preloadImage(imgUrl) {
