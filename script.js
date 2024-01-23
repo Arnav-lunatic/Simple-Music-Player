@@ -84,6 +84,7 @@ function updatePlaytime() {
     audio.addEventListener('ended', () => {
         playTime = 0
         playCount += 1
+        audio.pause()
         audio = new Audio(songsList[playCount].path)
         audio.play()
         songPlaying()
