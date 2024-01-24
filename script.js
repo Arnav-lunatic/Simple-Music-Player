@@ -84,6 +84,7 @@ function updatePlaytime() {
     audio.addEventListener('ended', () => {
         playTime = 0
         playCount += 1
+        audio.pause()
         if (playCount === songsList.length) {
             playCount=0
         }
