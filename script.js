@@ -84,15 +84,14 @@ function updatePlaytime() {
     audio.addEventListener('ended', () => {
         playTime = 0
         playCount += 1
+        if (playCount === songsList.length) {
+            playCount=0
+        }
         audio.pause()
         audio = new Audio(songsList[playCount].path)
         audio.play()
         songPlaying()
         updatePlaytime()
-
-        if (playCount >= songsList.length-1) {
-            playCount= -1
-        }
         // update the playing song in playlist view
         whichSongPlaying()
     })
@@ -154,9 +153,9 @@ function songPlaying() {
         muted()
     }
 
-    playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
-    cover.style.animationName = 'rotateImg'
+    playPauseButton.innerHTML = `<img src="assets/pause.png"></img>`
     cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
+    cover.style.animationName = 'rotateImg'
     cover.style.borderRadius = '50%'
     cdDesign.style.opacity = '1'
     pause=1
@@ -176,7 +175,7 @@ function PlayPauseSong(){
     else if(pause===1){
         audio.pause()
         pause=0
-        playPauseButton.innerHTML = `<svg class="play" id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><style>svg{fill:#ffffff}</style><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>`
+        playPauseButton.innerHTML = `<img src="assets/play.png">`
         cover.style.border = ''
         cover.style.animationName = ''
         cover.style.borderRadius = '20px'
@@ -214,10 +213,10 @@ forwardButton.addEventListener('click', () => {
         playCount=0
     }
     PlayPauseSong()
-    playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+    playPauseButton.innerHTML = `<img src="assets/pause.png">`
 
     //change unmute icon
-    muteButton.src = 'volume.png'
+    muteButton.src = 'assets/volume.png'
 
     // update the playing song in playlist view
     whichSongPlaying()
@@ -233,10 +232,10 @@ backwardButton.addEventListener('click', () => {
     }
     pause = 0
     PlayPauseSong()
-    playPauseButton.innerHTML = `<svg class='pause' id="controlButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>`
+    playPauseButton.innerHTML = `<img src="assets/play.png">`
 
     //change unmute icon
-    muteButton.src = 'volume.png'
+    muteButton.src = 'assets/volume.png'
     
     // update the playing song in playlist view
     whichSongPlaying()
@@ -389,6 +388,12 @@ loop.addEventListener('click', () => {
         audio.loop = false;
         looped = false
     }
+})
+
+//replay
+document.querySelector('.replay').addEventListener('click', () => {
+    audio.load()
+    audio.play()
 })
 
 

@@ -6,7 +6,7 @@ body {
     color: #fff;
 }
 body::before {
-    background: url('bg.jpg') no-repeat center center/cover;
+    background: url('assets/bg.jpg') no-repeat center center/cover;
     content: '';
     position: absolute;
     top: 0;
@@ -206,28 +206,36 @@ body::after {
     position: relative;
     justify-content: space-around;
     align-items: center;
-    justify-content: space-around;
-    width: 300px;
+    margin: 20px 0;
+    width: 100%;
+
 }
 
-#controlButton {
+.controlButton {
     width: 30px;
     height: 30px;
-    margin-top: 20px;
-    padding: 5px;
+    padding: 8px;
     transition: 0.3s;
     cursor: pointer;
 }
 
-#controlButton:active {
-    background: rgb(39, 39, 39);
+.loop {
+    padding: 1px;
+    border: transparent 2px solid;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.looped {
+    background-color: #444444;
+    border: #131313 2px solid;
+    border-radius: 10px;
+}
+
+.controlButton:active {
+    background: rgb(63, 63, 63);
     border-radius: 10px;
 }   
-
-
-.play-pause {
-    position: absolute;
-}
 
 .muteButton {
     width: 32px;
@@ -286,6 +294,7 @@ body::after {
         width: 565px;
         height: 255px;
     }
+    
     .cover {
         width: 200px;
     }
@@ -402,16 +411,3 @@ body::after {
     user-select: none; /* Standard syntax */
 }
 
-.loop {
-    padding: 1px;
-    border: transparent 2px solid;
-    margin-left: 20px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.looped {
-    background-color: #444444;
-    border: #131313 2px solid;
-    border-radius: 10px;
-}
