@@ -361,13 +361,13 @@ const muteButton = document.querySelector('.muteButton')
 function muted() {
     audio.muted = false;
     mute = false;
-    muteButton.src = 'volume.png';
+    muteButton.src = 'assets/volume.png';
 }
 muteButton.addEventListener('click', () => {
     if (!mute) {
         audio.muted = true;
         mute = true;
-        muteButton.src = 'volume-mute.png';
+        muteButton.src = 'assets/volume-mute.png';
     } else {
         muted()
     }
