@@ -89,9 +89,19 @@ body::after {
     transition: 1s;
 }
 
-.playlistDisplay{
-    align-items: start;
+.navbar {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
+}
+
+.openOnYT {
+    cursor: pointer;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.playlistDisplay{
     cursor: pointer;
     z-index: 25;
 }
@@ -111,11 +121,13 @@ body::after {
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 280px;
+    height: 270px;
     background-color: #1f1f1f;
     border-radius: 20px;
     position: absolute;
-    top: 15px;
+    top: 9%;
+    left: 50%;
+    transform: translateX(-50%);
     padding-top: 25px;
     overflow-y: auto;
     overscroll-behavior-inline: contain;
@@ -255,7 +267,7 @@ body::after {
 
     .playlistView {
         width: 370px;
-        height: 340px;
+        height: 320px;
     }
 
     .line {

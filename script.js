@@ -36,27 +36,44 @@ window.addEventListener('load', () => {
 
 //Song List
 const songsList = [
-    { name: 'If You Believe', artist: 'Strive to Be, Patch Crowe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3' },
-    { name: 'Mera Safar', artist:'Iqlipse Nova', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3'},
-    {name: "It's You", artist:'Ali Gatie', cover: "song/It's_You.jpeg", path: "song/It's_You.mp3"},
-    {name: 'Daylight', artist:'David Kushner', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3'},
-    {name: "Busy Earnin'", artist:'Jungle', cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3"},
-    {name: 'New Kings', artist:'Sleeping Wolf', cover: 'song/New_Kings.jpeg', path: 'song/New_Kings.mp3'},
-    {name: 'Happy Man', artist:'Jungle', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3'},
-    {name: 'Something in the way', artist:'Nirvana', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3'},
-    {name: 'Blinding Lights', artist:'The weeknd', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3'},
-    {name: 'Hustler', artist:'Zayde Wolf', cover: 'song/Hustler.jpeg', path: 'song/Hustler.mp3'},
-    {name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3'},
-    {name: 'Can You Hear me', artist:'Munn', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3'},
-    {name: "Wavin' Flag", artist:"K'NAAN", cover: "song/Wavin'_Flag.jpeg", path: "song/Wavin'_Flag.mp3"},
-    {name: 'Whatever It Takes', artist:'Imagine Dragons', cover: 'song/Whatever_It_Takes.jpeg', path: 'song/Whatever_It_Takes.mp3'},
-    {name: 'Wrecked', artist:'Imagine Dragons',  cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3'},
-    {name: 'Cancer', artist:'Twenty One Pilots', cover: 'song/Cancer.jpeg', path: 'song/Cancer.mp3' },
-    {name: 'All of the Star', artist:'Ed Sheeran', cover: 'song/All_of_the_Stars.jpeg', path: 'song/All_of_the_Stars.mp3'},
-    { name: "Mirage-Assassin's Creed", artist: 'One Republic', cover: 'song/Mirage.jpeg', path: 'song/Mirage.mp3' },
-    { name: "Supermarket Flowers", artist: 'Ed Sheeran', cover: 'song/Supermarket Flowers.jpeg', path: 'song/Supermarket Flowers.mp3' },
-    { name: "White Flag", artist: 'Dido', cover: 'song/White Flag.jpeg', path: 'song/White Flag.mp3' },
-    {name: "Thank You", artist:'Dido', cover: 'song/Thank you.jpeg', path: 'song/Thank You.mp3'},
+    { name: 'If You Believe', artist: 'Strive to Be, Patch Crowe', cover: 'song/If You Believe.jpeg', path: 'song/If You Believe.mp3', yt: 'https://www.youtube.com/watch?v=OEdNx0i7Q6I' },
+
+    { name: 'Mera Safar', artist: 'Iqlipse Nova', cover: 'song/Mera_Safar.jpeg', path: 'song/Mera_Safar.mp3', yt: 'https://www.youtube.com/watch?v=mn7MKh3l1iM' },
+
+    { name: "It's You", artist: 'Ali Gatie', cover: "song/It's_You.jpeg", path: "song/It's_You.mp3", yt: 'https://www.youtube.com/watch?v=F-cO2CMue4Q' },
+    
+    { name: 'Daylight', artist: 'David Kushner', cover: 'song/Daylight.jpeg', path: 'song/Daylight.mp3', yt: 'https://www.youtube.com/watch?v=MoN9ql6Yymw' },
+    
+    { name: "Busy Earnin'", artist: 'Jungle', cover: "song/Busy_Earnin'.jpeg", path: "song/Busy_Earnin'.mp3", yt: 'https://www.youtube.com/watch?v=BcsfftwLUf0' },
+    
+    { name: 'Happy Man', artist: 'Jungle', cover: 'song/Happy_Man.jpeg', path: 'song/Happy_Man.mp3', yt: 'https://www.youtube.com/watch?v=lv5uiDbbWv0' },
+    
+    { name: 'Something in the way', artist: 'Nirvana', cover: 'song/Something_In_The_Way.jpeg', path: 'song/Something_In_The_Way.mp3', yt: 'https://www.youtube.com/watch?v=4VxdufqB9zg' },
+    
+    { name: 'Blinding Lights', artist: 'The weeknd', cover: 'song/Blinding_Lights.jpeg', path: 'song/Blinding_Lights.mp3', yt: 'https://www.youtube.com/watch?v=4NRXx6U8ABQ' },
+    
+    { name: 'Hum katha Sunate', cover: 'song/Hum_katha_Sunate_Shri_Ram_Ki.jpeg', path: 'song/Hum_katha_Sunate_Shri_Ram_Ki.mp3', yt: 'https://www.youtube.com/watch?v=V3Am1_xNbtE' },
+    
+    { name: 'Can You Hear me', artist: 'Munn', cover: 'song/Can_You_Hear_me.jpeg', path: 'song/can_you_hear_me.mp3', yt: 'https://www.youtube.com/watch?v=-yAltxrbk0g' },
+    
+    { name: 'Wrecked', artist: 'Imagine Dragons', cover: 'song/Wrecked.jpeg', path: 'song/Wrecked.mp3', yt: 'https://www.youtube.com/watch?v=Y2NkuFIlLEo' },
+    
+    { name: 'Cancer', artist: 'Twenty One Pilots', cover: 'song/Cancer.jpeg', path: 'song/Cancer.mp3', yt: 'https://www.youtube.com/watch?v=6P-43ukn_l0' },
+    
+    { name: 'All of the Star', artist: 'Ed Sheeran', cover: 'song/All_of_the_Stars.jpeg', path: 'song/All_of_the_Stars.mp3', yt: 'https://www.youtube.com/watch?v=nkqVm5aiC28' },
+    
+    { name: "Mirage-Assassin's Creed", artist: 'One Republic', cover: 'song/Mirage.jpeg', path: 'song/Mirage.mp3', yt: 'https://www.youtube.com/watch?v=Dm_BrGu1sHM' },
+    
+    { name: "Supermarket Flowers", artist: 'Ed Sheeran', cover: 'song/Supermarket Flowers.jpeg', path: 'song/Supermarket Flowers.mp3', yt: 'https://www.youtube.com/watch?v=bIB8EWqCPrQ' },
+
+    { name: "White Flag", artist: 'Dido', cover: 'song/White Flag.jpeg', path: 'song/White Flag.mp3', yt: 'https://www.youtube.com/watch?v=RnDDQ9CY-1I' },
+    
+    { name: "Thank You", artist: 'Dido', cover: 'song/Thank you.jpeg', path: 'song/Thank You.mp3', yt: 'https://www.youtube.com/watch?v=irzOMH7GcnQ' },
+    
+    { name: "The Night We Met", artist: 'Lord Huro', cover: 'song/The_Night_We_Met.jpeg', path: 'song/The_Night_We_Met.mp3', yt: 'https://www.youtube.com/watch?v=wGF7PswOENQ' },
+    
+    { name: "Snowman", artist: 'Isak Danielson', cover: 'song/Snowman.jpeg', path: 'song/Snowman.mp3', yt: 'https://www.youtube.com/watch?v=gset79KMmt0' },
+    
 ]
 
 //shuffle the songsList
@@ -397,6 +414,10 @@ document.querySelector('.replay').addEventListener('click', () => {
     audio.play()
 })
 
+// open on youtube
+document.querySelector('.openOnYTlink').addEventListener('click', ()=>{
+    document.querySelector('.openOnYTlink').href = songsList[playCount].yt
+})
 
 // Preload Image and song
 function preloadImage(imgUrl) {
