@@ -268,7 +268,8 @@ backwardButton.addEventListener('click', backwardTrack)
 const forward10 = document.querySelector('.forward10sec')
 const backward10 = document.querySelector('.backward10sec')
 
-function seekForward() {
+
+forward10.addEventListener('mousedown', () => {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -277,9 +278,9 @@ function seekForward() {
     setTimeout(() => {
         forward10.style.rotate = '0deg'
     }, 500);
-}
+})
 
-function seekBackward() {
+backward10.addEventListener('mousedown', () => {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -288,10 +289,7 @@ function seekBackward() {
     setTimeout(() => {
         backward10.style.rotate = '0deg'
     }, 500);
-}
-
-forward10.addEventListener('mousedown', () => seekForward)
-backward10.addEventListener('mousedown', () => seekBackward)
+})
 
 
 // Change the Play Time to Time left
@@ -419,8 +417,11 @@ loop.addEventListener('click', () => {
 
 //replay
 document.querySelector('.replay').addEventListener('click', () => {
+    audio.pause()
     audio.load()
     audio.play()
+    pause=1
+    playPauseButton.innerHTML = `<img src="assets/pause.png">`
 })
 
 // open on youtube
@@ -458,8 +459,6 @@ navigator.mediaSession.setActionHandler("pause", () => {
     playPauseButton.innerHTML = `<img src="assets/play.png">`
 });
 
-navigator.mediaSession.setActionHandler("seekbackward", () => seekBackward);
-navigator.mediaSession.setActionHandler("seekforward", () => seekForward);
 
 
 
