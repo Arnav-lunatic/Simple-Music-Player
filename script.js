@@ -164,6 +164,7 @@ function songPlaying() {
     title.innerHTML = songsList[playCount].name
     artist.innerHTML = songsList[playCount].artist?songsList[playCount].artist : 'Unknown Artist'
     setVolume()
+    updateDataInNavigator()
     if (looped) {
         runLoop()
     }
@@ -222,7 +223,7 @@ body.addEventListener('keypress', (e) => {
 })
 
 //forward And backward
-forwardButton.addEventListener('click', () => {
+function forwardTrack() {
     audio.pause()
     playTime = 0
     pause = 0
@@ -238,9 +239,9 @@ forwardButton.addEventListener('click', () => {
 
     // update the playing song in playlist view
     whichSongPlaying()
-})
+}
 
-backwardButton.addEventListener('click', () => {
+function backwardTrack() {
     audio.pause()
     playTime = 0
     pause = 0
@@ -257,13 +258,17 @@ backwardButton.addEventListener('click', () => {
     
     // update the playing song in playlist view
     whichSongPlaying()
-})
+}
+
+forwardButton.addEventListener('click', forwardTrack)
+backwardButton.addEventListener('click', backwardTrack)
+
 
 // 10 seconds forward and backward
 const forward10 = document.querySelector('.forward10sec')
 const backward10 = document.querySelector('.backward10sec')
 
-forward10.addEventListener('mousedown', () => {
+function seekForward() {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -272,8 +277,9 @@ forward10.addEventListener('mousedown', () => {
     setTimeout(() => {
         forward10.style.rotate = '0deg'
     }, 500);
-})
-backward10.addEventListener('mousedown', () => {
+}
+
+function seekBackward() {
     if (pause === 0) {
         PlayPauseSong()
     }
@@ -282,7 +288,10 @@ backward10.addEventListener('mousedown', () => {
     setTimeout(() => {
         backward10.style.rotate = '0deg'
     }, 500);
-})
+}
+
+forward10.addEventListener('mousedown', () => seekForward)
+backward10.addEventListener('mousedown', () => seekBackward)
 
 
 // Change the Play Time to Time left
@@ -418,6 +427,42 @@ document.querySelector('.replay').addEventListener('click', () => {
 document.querySelector('.openOnYTlink').addEventListener('click', ()=>{
     document.querySelector('.openOnYTlink').href = songsList[playCount].yt
 })
+
+// media session in navigator
+function updateDataInNavigator() {
+    if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: songsList[playCount].name,
+            artist: songsList[playCount].artist,
+            artwork: [
+                {src: songsList[playCount].cover,}
+            ]
+        })
+    }
+}
+updateDataInNavigator()
+
+
+navigator.mediaSession.setActionHandler("previoustrack", () => backwardTrack);
+navigator.mediaSession.setActionHandler("nexttrack", () => forwardTrack());
+
+navigator.mediaSession.setActionHandler("play", () => {
+    audio.play()
+    pause=1
+    playPauseButton.innerHTML = `<img src="assets/pause.png">`
+});
+
+navigator.mediaSession.setActionHandler("pause", () => {
+    audio.pause()
+    pause=0
+    playPauseButton.innerHTML = `<img src="assets/play.png">`
+});
+
+navigator.mediaSession.setActionHandler("seekbackward", () => seekBackward);
+navigator.mediaSession.setActionHandler("seekforward", () => seekForward);
+
+
+
 
 // Preload Image and song
 function preloadImage(imgUrl) {

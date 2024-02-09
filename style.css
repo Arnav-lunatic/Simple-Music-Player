@@ -59,9 +59,10 @@ body::before {
     justify-content: space-around;
     background-color: #181818;
     position: absolute;
-    width: 70vw;
+    width: 75vw;
     max-width: 450px;
     height: 70vh;
+    min-height: 580px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -76,9 +77,10 @@ body::after {
     content:'';
     background-image: var(--changePlayTime);
     position: absolute;
-    width: 70vw;
+    width: 75vw;
     max-width: 450px;
     height: 70vh;
+    min-height: 580px;
     padding: 32px;
     top: 50%;
     left: 50%;
@@ -154,7 +156,7 @@ body::after {
 }
 
 .cover {
-    width: 250px;
+    width: 15rem;
     border-radius: 20px;
     box-shadow: -2px -2px 30px rgba(0, 0, 0, 0.959);
     transition: 1s;
@@ -192,7 +194,7 @@ body::after {
 }
 
 .title {
-    font-size: 30px;
+    font-size: 1.9rem;
     transition: 1s;
     cursor: default;
     margin: 10px;
@@ -304,49 +306,6 @@ body::after {
 
 }
 
-@media only screen and (max-height: 500px) {
-    .container{
-        flex-direction: row;
-        width: 500px;
-        height: 190px;
-    }
-    body::after {
-        width: 565px;
-        height: 255px;
-    }
-    
-    .cover {
-        width: 200px;
-    }
-    .cdDesign {
-        width: 45px;
-        height: 45px;
-        border-width: 10px;
-    }
-    .playlistView {
-        top: 10px;
-        left: 10px;
-        width: 260px;
-        height: 220px;
-        padding-top: 10px;
-    }
-    .playlistView > span{
-        margin: 9px 35px;
-    }
-    .title {
-        font-size: 30px;
-        text-align: center;
-    }
-
-    #controlButton {
-        width: 30px;
-        height: 30px;
-    }
-
-    .volumeContainer {
-        display: inline-block;
-    }
-}
 
 ::-webkit-scrollbar {
     height: 8px;
