@@ -73,6 +73,8 @@ const songsList = [
     { name: "The Night We Met", artist: 'Lord Huro', cover: 'song/The_Night_We_Met.jpeg', path: 'song/The_Night_We_Met.mp3', yt: 'https://www.youtube.com/watch?v=wGF7PswOENQ' },
     
     { name: "Snowman", artist: 'Isak Danielson', cover: 'song/Snowman.jpeg', path: 'song/Snowman.mp3', yt: 'https://www.youtube.com/watch?v=gset79KMmt0' },
+
+    { name: "Somewhere Only We Know", artist: 'rhianne music', cover: 'song/Somewhere Only We Know.jpeg', path: 'song/Somewhere Only We Know.mp3', yt: 'https://youtu.be/3oxjuUFj13w?si=Edbpu4mEm5INZ5Dh' },
     
 ]
 
@@ -458,9 +460,6 @@ navigator.mediaSession.setActionHandler("pause", () => {
     pause=0
     playPauseButton.innerHTML = `<img src="assets/play.png">`
 });
-
-
-
 
 
 // Preload Image and song
