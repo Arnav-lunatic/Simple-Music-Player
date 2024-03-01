@@ -178,7 +178,9 @@ function songPlaying() {
     cover.style.border = '1px solid rgba(255, 255, 255, 0.500)'
     cover.style.animationName = 'rotateImg'
     cover.style.borderRadius = '50%'
-    cdDesign.style.opacity = '1'
+    cdDesign.style.width = '65px'
+    cdDesign.style.height = '65px'
+    cdDesign.style.border = '15px solid #3a3a3a'
     pause=1
 }
 
@@ -200,7 +202,9 @@ function PlayPauseSong(){
         cover.style.border = ''
         cover.style.animationName = ''
         cover.style.borderRadius = '20px'
-        cdDesign.style.opacity = '0'
+        cdDesign.style.width = '0px'
+        cdDesign.style.height = '0px'
+        cdDesign.style.border = '0px'
     }
     updatePlaytime()
 }
